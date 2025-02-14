@@ -40,7 +40,7 @@ internal class RefreshTokenRepository : IRefreshTokenRepository<RefreshToken>
 
     public async Task<RefreshToken> GetByTokenAsync(string token)
     {
-        return await _context.RefreshTokens.FirstOrDefaultAsync(u => u.Token.Equals(token));
+        return await _context.RefreshTokens.FirstAsync(u => u.Token.Equals(token));
     }
 }
 

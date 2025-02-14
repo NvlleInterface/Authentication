@@ -9,10 +9,11 @@ internal class EmailService : IEmailService
     private readonly EmailConfiguration _emailConfig;
 
     public EmailService(EmailConfiguration emailConfig) => _emailConfig = emailConfig;
-    public void SendEmail(Message message)
+
+    public async Task SendEmailAsync(Message message)
     {
         var emailMessage = CreateEmailMessage(message);
-        Send(emailMessage);
+        await Send(emailMessage);
     }
 
     private MimeMessage CreateEmailMessage(Message message)
@@ -26,7 +27,7 @@ internal class EmailService : IEmailService
         return emailMessage;
     }
 
-    private void Send(MimeMessage mailMessage)
+    private async Task Send(MimeMessage mailMessage)
     {
         using var client = new SmtpClient();
         try
@@ -35,12 +36,12 @@ internal class EmailService : IEmailService
             client.AuthenticationMechanisms.Remove("XOAUTH2");
             client.Authenticate(_emailConfig.Username, _emailConfig.Password);
 
-            client.Send(mailMessage);
+            await client.SendAsync(mailMessage);
         }
         catch (Exception e)
         {
-
-            throw e;
+            Console.WriteLine(e.Message);
+            throw;
         }
         finally
         {

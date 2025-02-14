@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using TextswapAuthApi.Application.Common.Services.RefreshTokenRepositories;
 using TextswapAuthApi.Domaine.Models.Authentication.Entities;
 using Microsoft.Extensions.Configuration;
+using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 
 namespace TextswapAuthApi.Application;
 
@@ -15,15 +17,7 @@ public static class DependencyInjections
 {
     public static IServiceCollection AddDependencyModule(this IServiceCollection serviceDescriptors, IConfiguration configuration)
     {
-        serviceDescriptors
-                 .AddFluentValidation(options =>
-                 {
-                     // Validate child properties and root collection elements
-                     options.ImplicitlyValidateChildProperties = true;
-                     options.ImplicitlyValidateRootCollectionElements = true;
-                     // Automatic registration of validators in assembly
-                     options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-                 });
+        serviceDescriptors.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         serviceDescriptors.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()))
                                   .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

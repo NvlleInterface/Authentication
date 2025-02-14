@@ -15,7 +15,7 @@ public sealed class TokenGenerator
         JwtSecurityToken token = new JwtSecurityToken(
             issuer,
             audience,
-            (IEnumerable<System.Security.Claims.Claim>)claims,
+            claims,
             DateTime.UtcNow,
             DateTime.UtcNow.AddMinutes(expirattionMinutes),
             credentials

@@ -52,7 +52,7 @@ public sealed class ForgotPasswordHandler : IHandlerWrapper<ForgotPasswordComman
         var message = new Message(new string[] { email }, "Forgot password link", link);
         try
         {
-            _emailService.SendEmail(message);
+            await _emailService.SendEmailAsync(message);
 
         }
         catch (Exception e)

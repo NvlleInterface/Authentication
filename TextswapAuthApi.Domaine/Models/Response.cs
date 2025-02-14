@@ -3,10 +3,10 @@ namespace TextswapAuthApi.Domaine.Models;
 
 public static class Response
 {
-    public static Response<T> Fail<T>(IEnumerable<string> message, int statutCode, string titre, T data = default) =>
+    public static Response<T> Fail<T>(IEnumerable<string> message, int statutCode, string titre, T data = default!) =>
     new Response<T>(data, message, true, statutCode, titre);
 
-    public static Response<T> Fail<T>(string message, int statutCode, string titre, T data = default) =>
+    public static Response<T> Fail<T>(string message, int statutCode, string titre, T data = default!) =>
         new Response<T>(data, message, true, statutCode, titre);
 
     public static Response<T> Ok<T>(T data, IEnumerable<string> message, int statutCode, string titre) =>

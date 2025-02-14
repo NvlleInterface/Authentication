@@ -55,7 +55,7 @@ namespace TextswapAuthApi.Presentation.Configurations
                         {
                             if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
                             {
-                                context.Response.Headers.Add
+                                context.Response.Headers.Append
                                 ("Authentication-Token-Expired", "true");
                             }
                             return Task.CompletedTask;

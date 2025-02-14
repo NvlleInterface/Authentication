@@ -1,5 +1,4 @@
-﻿using BCrypt.Net;
-namespace TextswapAuthApi.Application.Common.Services.PasswordHashers;
+﻿namespace TextswapAuthApi.Application.Common.Services.PasswordHashers;
 
 internal class BcryptPasswordHasher : IPasswordHasher
 {

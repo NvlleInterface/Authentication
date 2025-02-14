@@ -53,9 +53,7 @@ var host = Host.CreateDefaultBuilder(args)
 
                 // Create DefaultAdminsistrator User
                 IServiceProvider serviceProvider = services.BuildServiceProvider();
-                 services.AddUserRoles(serviceProvider);
-
-
+                Task task = services.AddUserRoles(serviceProvider);
 
             })
             .ConfigureLogging(logger =>

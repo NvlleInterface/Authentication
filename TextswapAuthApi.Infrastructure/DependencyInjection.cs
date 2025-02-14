@@ -28,7 +28,7 @@ public static class DependencyInjection
     public static IServiceCollection AddDbContextModule(this IServiceCollection serviceDescriptors, IConfiguration configuration)
     {
         var dbType = configuration["DatabaseType"];
-        var connectionString = configuration.GetConnectionString(dbType);
+        var connectionString = configuration.GetConnectionString(dbType!);
 
         if (dbType == "PostgreSQL")
         {
