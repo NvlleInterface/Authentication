@@ -1,0 +1,6 @@
+@TextswapAuthApi.Presentation_HostAddress = http://localhost:5187
+
+GET {{TextswapAuthApi.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

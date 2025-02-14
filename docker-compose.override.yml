@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+  textswapauthapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+    ports:
+      - "5000"
+      - "5001"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro 
+  textswapauthapi.database:
+    image: postgres:latest
+    container_name: textswapauthapi.database
+    environment:
+        - POSTGRES_BD=AuthDB
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=Mod12345
+    volumes:
+        - ./.containers/textswapauthapi-db:/var/lib/postgresql/data
+    ports:
+        - 5432:5432
+   
+  authentification.cache:
+    image: redis:latest
+    restart: always
+    ports:
+        - '6379:6379' 
