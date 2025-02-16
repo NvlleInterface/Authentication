@@ -42,7 +42,11 @@ public sealed class RegisterHandle : IHandlerWrapper<RegisterCommand, ErrorRespo
                 return Response.Fail<ErrorResponsesDto>("username already exists.", StatusCodes.Status409Conflict, "Conflict");
             }
         }
+        var user = await _userRepository.FindByEmailAsync(request.Email);
+        await _userRepository.AddToRoleAsync(user!, "USER");
 
         return Response.Ok<ErrorResponsesDto>(null!, "User registed successful", StatusCodes.Status201Created, "Created");
     }
+
+    
 }

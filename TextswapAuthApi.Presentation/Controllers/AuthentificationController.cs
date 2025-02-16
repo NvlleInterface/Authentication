@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TextswapAuthApi.Api.OpenSpecifications.Attributes;
@@ -8,10 +9,12 @@ using TextswapAuthApi.Api.OpenSpecifications.Constants;
 using TextswapAuthApi.Api.OpenSpecifications.Samples.Responses;
 using TextswapAuthApi.Api.Response;
 using TextswapAuthApi.Application.Command.ForgotPassword;
+using TextswapAuthApi.Application.Command.Login;
 using TextswapAuthApi.Application.Command.Logout;
 using TextswapAuthApi.Application.Command.Refresh;
 using TextswapAuthApi.Application.Command.Register;
 using TextswapAuthApi.Application.Command.ResetPassword;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TextswapAuthApi.Presentation.Controllers;
 
@@ -71,7 +74,7 @@ public class AuthentificationController : ControllerBase
     [CustomSwaggerResponse(StatusCodes.Status404NotFound, typeof(ProblemDetails), typeof(NotFoundResponseSample), MediaTypes.ResponseProblem)]
     [CustomSwaggerResponse(StatusCodes.Status415UnsupportedMediaType, typeof(void))]
     [CustomSwaggerResponse(StatusCodes.Status500InternalServerError, typeof(void))]
-    public async Task<IActionResult> Login(ForgotPasswordCommand command)
+    public async Task<IActionResult> Login(LoginCommand command)
     {
         var login = await _mediator.Send(command, HttpContext.RequestAborted).ConfigureAwait(false);
 
@@ -140,4 +143,22 @@ public class AuthentificationController : ControllerBase
 
         return ReturnActionResult.ActionResult(resetPassword);
     }
+
+    //[Authorize(Policy = "AdminPolicy")]
+    //[HttpPost("assign-role")]
+    //public async Task<IActionResult> AssignRole([FromBody] RoleAssignCommand command)
+    //{
+    //    var user = await _userManager.FindByEmailAsync(model.Email);
+    //    if (user == null)
+    //        return NotFound("User not found");
+
+    //    var result = await _userManager.AddToRoleAsync(user, model.Role);
+    //    if (!result.Succeeded)
+    //        return BadRequest(result.Errors);
+
+
+    //    var assignRole = await _mediator.Send(command, HttpContext.RequestAborted).ConfigureAwait(false);
+
+    //    return ReturnActionResult.ActionResult(assignRole);
+    //}
 }
