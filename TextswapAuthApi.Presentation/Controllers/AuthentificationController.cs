@@ -18,7 +18,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TextswapAuthApi.Presentation.Controllers;
 
-[Route("api/[controller]")]
+[Route("api")]
 [ApiController]
 public class AuthentificationController : ControllerBase
 {

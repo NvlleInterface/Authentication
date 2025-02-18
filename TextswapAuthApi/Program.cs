@@ -47,7 +47,6 @@ var host = Host.CreateDefaultBuilder(args)
                 services.AddAuthenticationIdentiteBuilderModule();
 
                 services.AddEndpointsApiExplorer();
-                services.AddApplicationSwaggerGen();
 
                 services.AddDependencyModule(configuration);
 

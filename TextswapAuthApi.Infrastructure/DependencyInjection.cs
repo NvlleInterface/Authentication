@@ -42,11 +42,6 @@ public static class DependencyInjection
         }
     }
 
-    public static IServiceCollection AddApplicationSwaggerGen(this IServiceCollection serviceSwagger)
-    {
-        return serviceSwagger.AddSwaggerGenServices();
-    }
-
     public static IServiceCollection AddAuthenticationContextModule(this IServiceCollection serviceDescriptors, IConfiguration configuration)
     {
         return serviceDescriptors.AddDbContextModule(configuration);

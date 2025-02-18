@@ -24,7 +24,8 @@ RUN dotnet build "./TextswapAuthApi.csproj" -c $BUILD_CONFIGURATION -o /app/buil
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./TextswapAuthApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
+EXPOSE 5000
+ENV ASPNETCORE_URLS=http://+:5000
 # Cette phase est utilisée en production ou lors de l’exécution à partir de VS en mode normal (par défaut quand la configuration de débogage n’est pas utilisée)
 FROM base AS final
 WORKDIR /app

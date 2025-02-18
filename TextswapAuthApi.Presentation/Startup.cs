@@ -5,6 +5,8 @@ using System.Text.Json;
 using Asp.Versioning;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Asp.Versioning.ApiExplorer;
+using TextswapAuthApi.Presentation.Configurations;
+using Microsoft.OpenApi.Models;
 
 namespace TextswapAuthApi.Presentation
 {
@@ -38,7 +40,8 @@ namespace TextswapAuthApi.Presentation
             }, new System.Reflection.Assembly[0]);
             services.AddEndpointsApiExplorer();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGenServices();
+            
 
             services.AddCors(options =>
             {
