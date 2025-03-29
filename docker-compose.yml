@@ -1,9 +1,0 @@
-services:
-  textswapauthapi:
-    image: ${DOCKER_REGISTRY-}textswapauthapi
-    build:
-      context: .
-      dockerfile: TextswapAuthApi/Dockerfile
-    ports:
-      - "5000:5000"
-      - "5001:5001"
